@@ -17,7 +17,10 @@ upper_red = np.array([180, 255, 255])  # 红色的HSV阈值上限
 
 def object_detect(image):
     hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)                               # 图像从BGR颜色模型转换为HSV模型
+    cv2.imshow("hsv_img", hsv_img)                                                    # 使用OpenCV显示处理后的图像效果
+
     mask_red = cv2.inRange(hsv_img, lower_red, upper_red)                          # 图像二值化
+    cv2.imshow("mask_red", mask_red)                                                    # 使用OpenCV显示处理后的图像效果
 
     contours, hierarchy = cv2.findContours(mask_red, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE) # 图像中轮廓检测
 
@@ -38,7 +41,7 @@ def main(args=None):                                                            
     node = Node("node_object")                                                     # 创建ROS2节点对象并进行初始化
     node.get_logger().info("ROS2节点示例：检测图片中的苹果")
 
-    image = cv2.imread('/home/hcx/dev_ws/src/ros2_21_tutorials/learning_node/learning_node/apple.jpg')  # 读取图像
+    image = cv2.imread('/home/yjy/dev_ws/src/ros2_21_tutorials/01_learning_node/learning_node/apple.jpg')  # 读取图像
     object_detect(image)                                                            # 苹果检测
     rclpy.spin(node)                                                               # 循环等待ROS2退出
     node.destroy_node()                                                            # 销毁节点对象
