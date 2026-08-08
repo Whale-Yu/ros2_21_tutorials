@@ -11,7 +11,12 @@ from rclpy.node   import Node                    # ROS2 节点类
 from std_msgs.msg import String                  # ROS2标准定义的String消息
 
 """
-创建一个订阅者节点
+创建一个订阅者节点流程：
+- 编程接口初始化
+- 创建节点并初始化
+- 创建订阅者对象
+- 回调函数处理话题数据
+- 销毁节点并关闭接口
 """
 class SubscriberNode(Node):
     

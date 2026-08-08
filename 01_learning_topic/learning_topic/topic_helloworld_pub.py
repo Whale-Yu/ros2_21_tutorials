@@ -11,7 +11,14 @@ from rclpy.node import Node                      # ROS2 节点类
 from std_msgs.msg import String                  # 字符串消息类型
 
 """
-创建一个发布者节点
+创建一个发布者节点流程:
+1、编程接口初始化
+2、创建节点并初始化
+3、创建发布者对象
+4、创建并填充话题消息
+5、发布话题消息
+6、销毁节点并关闭接口
+
 """
 class PublisherNode(Node):
     
