@@ -13,14 +13,14 @@ from learning_interface.srv import GetObjectPosition    # 自定义的服务接�
 class objectClient(Node):
     def __init__(self, name):
         super().__init__(name)                                                                  # ROS2节点父类初始化
-        self.client = self.create_client(GetObjectPosition, 'get_target_position')
-        while not self.client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('service not available, waiting again...')
-        self.request = GetObjectPosition.Request()
+        self.client = self.create_client(GetObjectPosition, 'get_target_position')              # 创建服务客户端对象（服务端接口类型，服务名）
+        while not self.client.wait_for_service(timeout_sec=1.0):                                # 循环等待服务器成功其的
+            self.get_logger().info('service not available, waiting again...')   
+        self.request = GetObjectPosition.Request()                                              # 创建服务请求的数据对象
                     
-    def send_request(self):
+    def send_request(self):                                                                     # 创建一个发送服务请求的函数
         self.request.get = True
-        self.future = self.client.call_async(self.request)
+        self.future = self.client.call_async(self.request)                                      # 异步方式发送服务请求
 
 def main(args=None):
     rclpy.init(args=args)                             # ROS2 Python接口初始化
